@@ -1,8 +1,27 @@
-Flask==3.0.0
-Flask-SQLAlchemy==3.1.1
-psycopg2==2.9.9
-flask_migrate==4.0.5
-flask_login==0.6.3
-pylint==3.0.3
+# System PATH integration
 environs==10.0.0
+
+# Flask API
+Flask==3.0.0
+flask_login==0.6.3
+
+# Database
+## database ORM
+Flask-SQLAlchemy==3.1.1
+## database driver
+psycopg2==2.9.9
+## database schema migration tool (Alembic)
+flask_migrate==4.0.5
+
+# User Session password hashing
+flask_bcrypt
+
+# Static Analysis
+pylint==3.0.3
+
+# Tests
 pytest==7.4.3
+
+# REST API documentation
+#flask-restplus==0.13.0
+swagger-ui-py==23.9.23

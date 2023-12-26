@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, make_response
 
 # routes
 from app.routes.alumni_bp import blueprint as alumni_bp
@@ -19,6 +19,11 @@ def create_app(config_object="app.settings"):
 
     # print(f'from app.py: {app.app_context()}')
     # print(f'from app.py: {type(current_app.name)}')
+
+    # swagger
+    #flask_restplus_swagger(app)
+    swagger_ui(app)
+
     return app
 
 
@@ -36,6 +41,18 @@ def register_blueprints(app):
     app.register_blueprint(history_bp)
 
     return None
+
+
+def swagger_ui(app):
+    """ plug swagger-ui into the existing Flask API """
+    from swagger_ui import api_doc
+
+    api_doc(
+            app,
+            config_path='../docs/swagger-ui.yaml',
+            url_prefix='/api/doc',
+            title='first api doc'
+            )
 
 
 if __name__ == '__main__':

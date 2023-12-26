@@ -5,22 +5,15 @@ Featuring:
 - Backend:Python/Flask
 - Frontend: Node/Vue.js
     - Build tooling: Vite
-- Visualization: vue-chartjs
+- Visualization: vue-chart.js
 - Database ORM: SQLAlchemy
     - sqlite3 for session cache
     - postgres for dataframe storage
 
-Since it's common for backends to connect to a database, the software infrastructure of these underlying systems can be deployed in a lightweight virtualized manner, using OCI containers. The orchestration tool ```docker-compose``` is compatible with Podman and k8s to deploy multiple containers, and even thinking about tools like Docker Swarm, you can adapt the YAML to run in a single host but to be scalable to run distributed. What makes it possible are components such as __Podman Service__ and the kubernetes distro __k3s__.
-
-The logical infrastructure of this project attempts to deploy a simple proof-of-concept backend adopting a test driven development approach, seemingly scaling from single host mocking with unit tests to multi-node integration tests if needed, be it on-premise or cloud.
+ This infrasctructure deployment attemps to deploy a simple PoC adopting a test driven development approach, seemingly scaling from single host unit test mocking to multi-node integration test if needed, whether on-premise or cloud. The project is containerized into three different OCI containers (backend, frontend and database) and then deployed with docker-compose, which YAML declarations can be made compatible with Podman Service and k8s' distro k3s.
 
 
-```sh
-; git clone git@github.com:deomorxsy/florm.git
-; python3 -m venv venv
-```
-
-# Frontend
+## Frontend
 
 Scaffolding generated with create-vite@5.1.0:
 ```sh
@@ -29,7 +22,7 @@ Scaffolding generated with create-vite@5.1.0:
 ; npm run dev
 
 ```
-# Database
+## Database
 ### Standalone container
 
 Run the container process with the database
@@ -53,12 +46,16 @@ done
 ```
 
 
-# Backend
+## Backend
 ### Running in Standalone mode
 
+Make sure to set the virtualenv:
+```sh
+; git clone git@github.com:isi23drop/vlusk-primer.git
+; python3 -m venv venv
+```
+
 Prepare the environment:
-
-
 ```sh
 ; cd ./vlusk/backend/
 ; source ../venv/bin/activate
@@ -67,17 +64,17 @@ Prepare the environment:
 
 ```
 
-
 Now that all dependencies are installed, just run each process from a different terminal:
 
-1. init the sqlite3 database
+1. database migration
 ```sh
 flask --app app init-db
 ```
 
 2. PS: now in flask 3.0 the FLASK_ENV is deprecated alongside the debug mode that goes back to the framework on the CLI call, hence the flag "--debug".
 ```sh
-flask --app app run --debug
+cd ./app/
+flask --debug run
 ```
 
 ### Podman Service and DOCKER_HOST
@@ -103,5 +100,5 @@ docker-compose  up
 ```
 
 ### Running with the podman-compose script
-### Running with k8s
+## Running with k8s
 Here you can use k3s.

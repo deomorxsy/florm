@@ -13,7 +13,7 @@ def test_alumni_route():
     return make_response(jsonify('created user!'), 200)
 
 
-@blueprint.route('/alumni', methods=['GET'])
+@blueprint.route('/alumni/', methods=['GET'])
 def get_all_route():
     return get_all_alumni_ctr()
 

@@ -1,4 +1,4 @@
-from app.models.machine import Alumni
+from app.models.models import Alumni
 from app.services.alumni import (
         get_all_alumni, get_alumni,
         update_alumni, delete_alumni

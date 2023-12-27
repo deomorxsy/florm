@@ -35,7 +35,9 @@ class Lecture(db.Model):
     def json(self):
         return {'id': self.id,
                 'codigo': self.codigo,
-                'nome': self.nome
+                'nome': self.nome,
+                #'carga_horaria': self.carga_horaria,
+                #'credito': self.credito
                 }
 
     def __repr__(self):

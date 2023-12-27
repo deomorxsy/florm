@@ -3,6 +3,7 @@
 
 Featuring:
 - Backend:Python/Flask
+    - Session-Cookie Authentication: flask_login
 - Frontend: Node/Vue.js
     - Build tooling: Vite
 - Visualization: vue-chart.js

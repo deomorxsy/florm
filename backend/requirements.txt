@@ -14,7 +14,7 @@ psycopg2==2.9.9
 flask_migrate==4.0.5
 
 # User Session password hashing
-flask_bcrypt
+#flask_bcrypt
 
 # Static Analysis
 pylint==3.0.3
@@ -23,5 +23,7 @@ pylint==3.0.3
 pytest==7.4.3
 
 # REST API documentation
-#flask-restplus==0.13.0
 swagger-ui-py==23.9.23
+
+# Form rendering, validation, and CSRF protection for Flask with WTForms
+Flask-WTF==1.2.1

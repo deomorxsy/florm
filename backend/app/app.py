@@ -1,9 +1,13 @@
 from flask import Flask, make_response
 
-# routes
+# orm routes
 from app.routes.alumni_bp import blueprint as alumni_bp
 from app.routes.lecture_bp import blueprint as lecture_bp
 from app.routes.history_bp import blueprint as history_bp
+
+# session routes
+from app.user.views import blueprint as user_views_bp
+from app.public.views import blueprint as public_views_bp
 
 # extensions
 from .extensions import db
@@ -36,9 +40,15 @@ def register_extensions(app):
 
 def register_blueprints(app):
     """ register flask blueprints """
+
+    # orm REST API routes
     app.register_blueprint(alumni_bp)
     app.register_blueprint(lecture_bp)
     app.register_blueprint(history_bp)
+
+    # session-cookie authentication views route
+    app.register_blueprint(user_views_bp)
+    app.register_blueprint(public_views_bp)
 
     return None
 

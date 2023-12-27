@@ -15,8 +15,8 @@ servers:
 paths:
   /:
     get:
-      summary: Returns a list of the university alumni.
-      description: Optional extended description in CommonMark or HTML.
+      summary: List of university items
+      description: Returns a list of the university items {alumni/lectures/history-by-alumni} .
       responses:
         '200':    # status code
           description: A JSON array of alumni names
@@ -26,7 +26,7 @@ paths:
                 type: array
                 items:
                   type: string
-  /<int:id>:
+  /{itemId}:
     get:
       summary: Returns info by alumni_id.
       description: alumni_id columns.

@@ -1,7 +1,7 @@
 # vlusk-primer
 > Simple fullstack and monorepo PoC for data visualization, using Python/Flask, Node/Vue.js and Postgres, deployed as containers handling backend, frontend and database. Test it locally with docker-compose/k3s, running the individual container images or via scripts.
 
-container images at [hub]()
+container images at [hub]().
 
 Featuring:
 - Backend:Python/Flask
@@ -20,6 +20,7 @@ Featuring:
 
 
 ## Frontend
+> manually running the process
 
 Scaffolding generated with create-vite@5.1.3:
 
@@ -32,7 +33,7 @@ Scaffolding generated with create-vite@5.1.3:
 
 ```
 ## Database
-### Standalone container
+> run it as a standalone container so instances of postgres aren't polluted
 
 Run the container process with the database
 ```sh
@@ -56,7 +57,7 @@ done
 
 
 ## Backend
-### Running in Standalone mode
+> manually running the process
 
 Make sure to set the virtualenv:
 ```sh
@@ -86,7 +87,9 @@ cd ./app/
 flask --debug run
 ```
 
-### Podman Service and DOCKER_HOST
+# Deployments
+
+## Podman Service and DOCKER_HOST
 [compose](https://docs.docker.com/compose/) concentrates in orchestrating multiple containers in a single host. To do this with k8s, you would need kind, k3s (does not use virtualization) or similar. It was made to be compatible with other OCI runtimes, such as Podman, which was one of the first to enable rootless containers, and can be setup with compose using the Podman Service's systemd unit file for unix sockets.
 
 The orchestration tool ```docker-compose``` supports Podman Service through the DOCKER_HOST environment variable. This makes it possible to run containers with podman but with the benefit of rootless.
@@ -98,7 +101,7 @@ Source the [script](./scripts/podman-service-compose.sh) and run it to run compo
 ```
 
 
-### Running with the podman-compose script
+## Running with the podman-compose script
 
 
 ## Running with k8s

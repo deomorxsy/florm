@@ -1,25 +1,33 @@
 # vlusk-primer
-> Simple fullstack project monorepo for data visualization with Python/Flask and Node/Vue.js
+> Simple fullstack and monorepo PoC for data visualization, using Python/Flask, Node/Vue.js and Postgres, deployed as containers handling backend, frontend and database. Test it locally with docker-compose/k3s, running the individual container images or via scripts.
+
+container images at [hub]()
 
 Featuring:
 - Backend:Python/Flask
-    - Session-Cookie Authentication: flask_login
+    - ~Session-Cookie Authentication: flask_login~
+    - PyJWT
 - Frontend: Node/Vue.js
     - Build tooling: Vite
-- Visualization: vue-chart.js
+    - Validation: vee-validate, yup, “@vee-validate/yup”
+    - Routing: vue-router
+    - Visualization: vue-chartjs
+    - Visualization: vue-chart.js
 - Database ORM: SQLAlchemy
-    - sqlite3 for session cache
     - postgres for dataframe storage
+    - sqlite3 for session cache [?]
 
- This infrasctructure deployment attemps to deploy a simple PoC adopting a test driven development approach, seemingly scaling from single host unit test mocking to multi-node integration test if needed, whether on-premise or cloud. The project is containerized into three different OCI containers (backend, frontend and database) and then deployed with docker-compose, which YAML declarations can be made compatible with Podman Service and k8s' distro k3s.
 
 
 ## Frontend
 
-Scaffolding generated with create-vite@5.1.0:
+Scaffolding generated with create-vite@5.1.3:
+
 ```sh
-; npm create vite@5.1.0 frontend/ -- --template vue-ts
-; npm install
+; npm create vite@5.1.3 frontend/ -- --template vue-ts
+;
+; npm install vee-validate@4.12.5 yup@1.3.3 vue-router@4.2.5 vue-router@4.2.5 axios@1.6.7
+;
 ; npm run dev
 
 ```

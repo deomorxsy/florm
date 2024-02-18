@@ -87,27 +87,19 @@ flask --debug run
 ```
 
 ### Podman Service and DOCKER_HOST
+[compose](https://docs.docker.com/compose/) concentrates in orchestrating multiple containers in a single host. To do this with k8s, you would need kind, k3s (does not use virtualization) or similar. It was made to be compatible with other OCI runtimes, such as Podman, which was one of the first to enable rootless containers, and can be setup with compose using the Podman Service's systemd unit file for unix sockets.
+
 The orchestration tool ```docker-compose``` supports Podman Service through the DOCKER_HOST environment variable. This makes it possible to run containers with podman but with the benefit of rootless.
 
-1. install docker-compose
-2. use the init system to start the Podman Socket. Using Systemd here:
+Source the [script](./scripts/podman-service-compose.sh) and run it to run compose with podman:
+
 ```sh
-systemctl -user start podman.socket
-```
-3. check if the system is running. It should return an "OK"
-```sh
-$ curl -H "Content-Type: application/json" --unix-socket $XDG_RUNTIME_DIR/podman/podman.sock http://localhost/_ping
-```
-4. set up the DOCKER_HOST environment variable:
-```sh
-export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+; source ./scripts/podman-service-compose.sh
 ```
 
-5. run docker-compose at the root of the repository
-```sh
-docker-compose  up
-```
 
 ### Running with the podman-compose script
+
+
 ## Running with k8s
-Here you can use k3s.
+Kubernetes is a container orchestrator. To run this project on single host just like the Compose tool, you can use tools like kind or k3s (which don't use virtualization).

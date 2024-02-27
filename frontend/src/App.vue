@@ -1,6 +1,12 @@
 <script setup lang="ts">
 //import HelloWorld from './components/HelloWorld.vue'
-import Login from './components/Login.vue'
+
+import { RouterView } from 'vue-router';
+
+//import Login from './components/Login.vue';
+//import Register from './components/Register.vue';
+//import Ping from './components/Ping.vue';
+
 </script>
 
 <template>
@@ -15,7 +21,8 @@ import Login from './components/Login.vue'
   </div>
   <HelloWorld msg="Vite + Vue" />
 -->
-  <Login msg="Log In" />
+  <RouterView />
+  <!--<Login msg="Log In" />-->
 </template>
 
 <style scoped>

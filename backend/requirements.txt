@@ -3,7 +3,7 @@ environs==10.0.0
 
 # Flask API
 Flask==3.0.0
-flask_login==0.6.3
+Flask-login==0.6.3
 
 # Database
 ## database ORM
@@ -11,10 +11,17 @@ Flask-SQLAlchemy==3.1.1
 ## database driver
 psycopg2==2.9.9
 ## database schema migration tool (Alembic)
-flask_migrate==4.0.5
+Flask-Migrate==4.0.5
 
 # User Session password hashing
-#flask_bcrypt
+# bcrypt or werkzeug (native) could be used.
+#bcrypt==4.1.2
+werkzeug==3.0.1
+
+# Enable CORS: cross-origin requests, which comes
+#from different protocol, IP address, domain name
+# or port.
+flask-cors==4.0.0
 
 # Static Analysis
 pylint==3.0.3

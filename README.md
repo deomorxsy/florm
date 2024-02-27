@@ -8,11 +8,12 @@ Featuring:
     - ~Session-Cookie Authentication: flask_login~
     - PyJWT
 - Frontend: Node/Vue.js
-    - Build tooling: Vite
-    - Validation: vee-validate, yup, “@vee-validate/yup”
-    - Routing: vue-router
-    - Visualization: vue-chartjs
-    - Visualization: vue-chart.js
+    - Build tooling: [Vite](https://vitejs.dev/guide/)
+    - HTTP requests: [Axios](https://axios-http.com/docs/intro)
+    - State Management: [pinia](https://pinia.vuejs.org/introduction.html)
+    - Validation: [vee-validate](https://vee-validate.logaretm.com/v4/), [yup](https://github.com/jquense/yup), “@vee-validate/yup”
+    - Routing: [vue-router](https://router.vuejs.org/)
+    - Visualization: [vue-chartjs](https://vue-chartjs.org/)
 - Database ORM: SQLAlchemy
     - postgres for dataframe storage
     - sqlite3 for session cache [?]
@@ -27,7 +28,9 @@ Scaffolding generated with create-vite@5.1.3:
 ```sh
 ; npm create vite@5.1.3 frontend/ -- --template vue-ts
 ;
-; npm install vee-validate@4.12.5 yup@1.3.3 vue-router@4.2.5 vue-router@4.2.5 axios@1.6.7
+; npm install vee-validate@4.12.5 yup@1.3.3 vue-router@4.2.5 vue-router@4.2.5 axios@1.6.7 pinia@2.1.7
+;
+; npm install -D '@types/node'
 ;
 ; npm run dev
 

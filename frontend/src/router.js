@@ -1,11 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "./components/Home.vue";
-import Login from "./components/Login.vue";
+import Home from "./views/HomeView.vue";
+import Login from "./views/LoginView.vue";
 import Register from "./components/Register.vue";
 import Ping from "./components/Ping.vue";
 
 // lazy-loaded
-const Profile = () => import("./components/Profile.vue")
+const Profile = () => import("./views/Profile.vue")
 //const BoardAdmin = () => import("./components/BoardAdmin.vue")
 //const BoardModerator = () => import("./components/BoardModerator.vue")
 const BoardUser = () => import("./components/dashBoardUser.vue")

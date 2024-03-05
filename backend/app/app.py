@@ -38,6 +38,9 @@ def create_app(config_object="app.settings"):
     # swagger
     swagger_ui(app)
 
+    # debug
+    print(app.config["JWT_IDENTITY_CLAIM"])
+
     # enable CORS
     # logging.basicConfig(level=logging.INFO)
     return app
@@ -47,7 +50,7 @@ def register_extensions(app):
     """ register flask extensions """
     db.init_app(app)
     jwt.init_app(app)
-    migrate.init_app(app)
+    migrate.init_app(app, db)
 
     return None
 

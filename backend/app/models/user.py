@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """User models."""
 
-from flask_login import UserMixin
+#from flask_login import UserMixin
 from app.database import Column, PkModel, db, reference_col, relationship
 
 # logging timestamps
@@ -32,8 +32,9 @@ class Role(PkModel):
 
 class User(UserMixin, PkModel):
     """a user of the app"""
-
     __tablename__ = "users"
+
+    #id = db.Column(db.Integer, primary_key=True)
     username = Column(db.String(80), unique=True, nullable=False)
     email = Column(db.String(80), unique=True, nullable=False)
     _password = Column("password", db.LargeBinary(128), nullable=True)

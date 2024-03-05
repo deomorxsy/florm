@@ -14,6 +14,7 @@ DEBUG = ENV == "development"
 DEBUG_TB_ENABLED = DEBUG
 
 # SQLAlchemy ORM
+# set DB_URL before. Present on ../../scripts/run-backend.sh
 SQLALCHEMY_DATABASE_URI = env.str("DB_URL") or \
         'postgresql://' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_TRACK_MODIFICATIONS = False

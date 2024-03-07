@@ -1,4 +1,4 @@
-name: Python package
+ewsname: Python package
 
 on: [push]
 

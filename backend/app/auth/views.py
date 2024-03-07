@@ -1,3 +1,4 @@
+from flask_cors import CORS
 from flask import (
         request, jsonify,
         redirect, url_for,
@@ -11,7 +12,6 @@ from flask_jwt_extended import (
     get_jwt_identity, # get identity of JWT in a protected route
     get_jwt, #
 )
-
 from app.models.jwt_user import User
 # replace by swagger
 # from app.extensions import bcrypt,jwt, apispec
@@ -24,44 +24,50 @@ from app.auth.helpers import (
 
 
 blueprint = Blueprint('auth', __name__, url_prefix='/auth')
+CORS(blueprint)
 
-
-@blueprint.route("/register/", methods=["POST"])
+@blueprint.route("/register", methods=["POST"])
 def register():
     """register new user"""
 
-    username = request.json.get("username", None)
-    password = request.json.get("password", None)
-    email = request.json.get("email", None)
+    data = request.get_json()
+
+    username = data.get("username")
+    password = data.get("password")
+    email = data.get("email")
 
     if not username or not password:
-        return jsonify({"msg": "Missing username or password"}), 400
+        return jsonify({"msg": "case 1: Missing username or password"}), 400
 
-    user = User.query.filter_by(username=username).first()
-    if user is None or not bcrypt.check_password(user.password, password):
-        return jsonify({"msg": "Missing username or password"}), 400
-    else:
-        User.create(
-                username=username,
-                password=password,
-                email=email,
-                active=True,
-                )
-        flash("thank you for registering, you can log in now ;D")
-        # return redirect(url_for("public.home"))
-        return redirect("127.0.0.1:5173/home/")
+    user = User.get_by_username(username=username)
+    if user is not None:
+        return jsonify({"error": "user already exists. :("}), 409
+
+    # user schema, hashing and commit logic goes into models.jwt_user
+    new_user = User(username=username, email=email)
+    new_user.set_password(value=password)
+    new_user.save()
+
+    response = jsonify({"msg": "user created! :D"})
+    response.headers.add("Access-Control-Allow-Origin", "*")
+
+    return response
 
 
 @blueprint.route("/login", methods=["POST"])
 def login():
     """ login route for connection with frontend """
-    username = request.json.get("username", None)
-    password = request.json.get("password", None)
+
+    data = request.get_json()
+
+    username = data.get("username")
+    password = data.get("password")
+
     if not username or not password:
         return jsonify({"msg": "Missing username or password"}), 400
 
     user = User.query.filter_by(username=username).first()
-    if user is None or not bcrypt.check_password(user.password, password):
+    if user is None or not bcrypt.check_password_hash(user.password, password):
         return jsonify({"msg": "bad credentials"}), 400
 
     if not request.is_json:
@@ -115,4 +121,4 @@ def user_loader_callback(jwt_headers, jwt_payload):
 def check_if_token_revoked(jwt_headers, jwt_payload):
     return is_token_revoked(jwt_payload)
 
-# adjust last one to swagger instead of apidoc
+# adjust last one to swagger instead of api

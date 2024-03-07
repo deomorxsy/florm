@@ -1,27 +1,23 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api/auth/';
+const API_URL = 'http://localhost:5000/auth/register';
 
 class AuthService {
-    login(user) {
-        return axios.post(API_URL + 'singin', { // 1. POST {username, password}
-            username: user.username,
-            password: user.password
-        })
-        .then(response => {
-            if (response.data.accessToken) { // 2. save JWT to localStorage
-                //localStorage.setItem('user', JSON.stringify(response.data));
-            }
-
-            return response.data;
-        });
+    handleSubmit = async (user: unknown): Promise<void> => {
+         try {
+            const response = await axios.post(API_URL, {
+                username: user.username,
+                password: user.password,
+                first_name: user.first_name,
+                last_name: user.last_name
+            });
+            return response.data
+         } catch (error: unknown) {
+             throw new Error(`Error in 'handleSubmit(${user})': ${error}`);
+         }
     }
 
-    logout(){ // remove JWT from localStorage
-        localStorage.removeItem('user')
-    }
-
-    register(user) { // POST {username, email, password}
+    register(user: schema) { // POST {username, email, password}
         return axios.post(API_URL + 'signup', {
             username: user.username,
             email: user.email,

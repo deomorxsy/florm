@@ -49,6 +49,8 @@ def create_app(config_object="app.settings"):
 def register_extensions(app):
     """ register flask extensions """
     db.init_app(app)
+    with app.app_context():
+        db.create_all()
     jwt.init_app(app)
     migrate.init_app(app, db)
 

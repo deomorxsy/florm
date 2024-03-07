@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """User models."""
 
-#from flask_login import UserMixin
+from flask_login import UserMixin
 from app.database import Column, PkModel, db, reference_col, relationship
 
 # logging timestamps

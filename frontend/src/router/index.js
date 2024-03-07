@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
 import { useAuthStore, useAlertStore } from '@/stores';
-import { Home } from '@/views';
+import { HomeView } from '@/views';
 import Ping from '../components/Ping.vue'
 import accountsRoutes from './account.routes';
 import userRoutes from './user.routes';
@@ -13,7 +13,7 @@ const router = createRouter({
     linkActiveClass: 'active',
     routes: [
         //...
-        { path: '/', name: 'home', component: Home },
+        { path: '/', name: 'home', component: HomeView },
         //{},
         //{},
         // landing page redirects
@@ -31,7 +31,7 @@ const router = createRouter({
         {
             path: '/register',
             name: 'register',
-            component: Register
+            component: HomeView
         },
         {
             path: '/profile',

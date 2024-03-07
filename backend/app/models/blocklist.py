@@ -1,21 +1,23 @@
 """
 blocklist implementation from the database
-
 """
-from flask import Flask, jsonify
+# from flask import Flask, jsonify
+# import redis
 from datetime import timedelta
+
+from app.extensions import db
+
+'''
 from flask_jwt_extended import (
     create_access_token,
     get_jwt,
     jwt_required,
     JWTManager
 )
-import redis
+'''
 
-from app.extensions import db
 
 ACCESS_EXPIRES = timedelta(hours=1)
-
 
 
 class TokenBlocklist(db.Model):
@@ -24,7 +26,7 @@ class TokenBlocklist(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     jti = db.Column(db.String(36), nullable=False, unique=True)
     token_type = db.Column(db.String(10), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey("users.id"), nullable=False)
     revoked = db.Column(db.Boolean, nullable=False)
     expires = db.Column(db.DateTime, nullable=False)
 

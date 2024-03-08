@@ -5,6 +5,7 @@ import { HomeView } from '@/views';
 import Ping from '../components/Ping.vue'
 import accountsRoutes from './account.routes';
 import userRoutes from './user.routes';
+import { prependOnceListener } from 'process';
 
 
 // export const router
@@ -24,9 +25,19 @@ const router = createRouter({
             component: Ping
         },
         {
-            path: '/login',
-            name: 'login',
-            component: Login
+            path: '/about',
+            name: 'about',
+            component: About
+        },
+        {
+            path: '/policy',
+            name: 'policy',
+            component: Policy
+        },
+        {
+            path: '/contact',
+            name: 'contact',
+            component: Contact
         },
         {
             path: '/register',

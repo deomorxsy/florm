@@ -1,3 +1,5 @@
+migrations/
+
 .venv/
 venv/
 
@@ -15,3 +17,5 @@ build/
 *.egg-info/
 
 *.sqlite
+
+.vs

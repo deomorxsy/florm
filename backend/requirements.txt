@@ -1,8 +1,39 @@
-Flask==3.0.0
-Flask-SQLAlchemy==3.1.1
-psycopg==3.1.14
-psycopg2==2.9.9
-flask_migrate==4.0.5
-flask_login==0.6.3
-pylint==3.0.3
+# System PATH integration
 environs==10.0.0
+
+# Flask API
+Flask==3.0.0
+Flask-login==0.6.3
+
+# Database
+## database ORM
+Flask-SQLAlchemy==3.1.1
+## database driver
+psycopg2==2.9.9
+## database schema migration tool (Alembic)
+Flask-Migrate==4.0.5
+
+# session cache
+redis==5.0.1
+
+# User Session password hashing
+# bcrypt or werkzeug (native) could be used.
+Flask-Bcrypt==1.0.1
+Flask-JWT-Extended==4.6.0
+
+# Enable CORS: cross-origin requests, which comes
+#from different protocol, IP address, domain name
+# or port.
+flask-cors==4.0.0
+
+# Static Analysis
+pylint==3.0.3
+
+# Tests
+pytest==7.4.3
+
+# REST API documentation
+swagger-ui-py==23.9.23
+
+# Form rendering, validation, and CSRF protection for Flask with WTForms
+Flask-WTF==1.2.1

@@ -21,6 +21,11 @@ CREATE TABLE disciplina (
      --cada disciplina tem 1 perfil
 );
 
+-- Disciplina:
+-- TIPO_OBRIGATORIA = 1;
+-- TIPO_ELETIVA = 2;
+
+
 
 CREATE TABLE historico (
      id_aluno INT NOT NULL,
@@ -35,6 +40,15 @@ CREATE TABLE historico (
      FOREIGN KEY (id_disciplina) REFERENCES disciplina(id)
 );
 
+ -- Historico:
+-- STATUS_NAO_CURSADA = 0;
+-- STATUS_APROVADA = 1;
+-- STATUS_APROVADA_MEDIA = 2;
+-- STATUS_REPROVADA = 3;
+-- STATUS_REPROVADA_FALTA = 4;
+-- STATUS_CURSANDO = 5;
+-- STATUS_CANCELADO_COM_ONUS = 6;
+-- STATUS_DISPENSADO = 7;
 
 
 

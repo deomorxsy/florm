@@ -1,4 +1,4 @@
-from app.models.machine import History
+from app.models.models import History
 from app.services.history import (
         get_all_hist, get_term,
         update_history, delete_history, get_by_lecture

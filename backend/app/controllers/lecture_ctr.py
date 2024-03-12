@@ -1,4 +1,4 @@
-from app.models.machine import Lecture
+from app.models.models import Lecture
 from app.services.lecture import (
         get_all_lectures, get_lecture,
         update_lecture, delete_lecture

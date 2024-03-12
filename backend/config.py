@@ -13,5 +13,6 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     STATIC_FOLDER = f"{os.getenv('APP_FOLDER')}/project/static"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    JWT_CONFIG_CLAIM = 431432
 
 

@@ -1,36 +1,42 @@
 # vlusk-primer
-> Simple fullstack project monorepo for data visualization with Python/Flask and Node/Vue.js
+> Simple fullstack and monorepo PoC for data visualization, using Python/Flask, Node/Vue.js and Postgres, deployed as containers handling backend, frontend and database. Test it locally with docker-compose/k3s, running the individual container images or via scripts.
+
+container images at [hub]().
 
 Featuring:
 - Backend:Python/Flask
+    - ~Session-Cookie Authentication: flask_login~
+    - PyJWT
 - Frontend: Node/Vue.js
-    - Build tooling: Vite
-- Visualization: vue-chartjs
+    - Build tooling: [Vite](https://vitejs.dev/guide/)
+    - HTTP requests: [Axios](https://axios-http.com/docs/intro)
+    - State Management: [pinia](https://pinia.vuejs.org/introduction.html)
+    - Validation: [vee-validate](https://vee-validate.logaretm.com/v4/), [yup](https://github.com/jquense/yup), “@vee-validate/yup”
+    - Routing: [vue-router](https://router.vuejs.org/)
+    - Visualization: [vue-chartjs](https://vue-chartjs.org/)
 - Database ORM: SQLAlchemy
-    - sqlite3 for session cache
     - postgres for dataframe storage
+    - sqlite3 for session cache [?]
 
-Since it's common for backends to connect to a database, the software infrastructure of these underlying systems can be deployed in a lightweight virtualized manner, using OCI containers. The orchestration tool ```docker-compose``` is compatible with Podman and k8s to deploy multiple containers, and even thinking about tools like Docker Swarm, you can adapt the YAML to run in a single host but to be scalable to run distributed. What makes it possible are components such as __Podman Service__ and the kubernetes distro __k3s__.
 
-The logical infrastructure of this project attempts to deploy a simple proof-of-concept backend adopting a test driven development approach, seemingly scaling from single host mocking with unit tests to multi-node integration tests if needed, be it on-premise or cloud.
 
+## Frontend
+> manually running the process
+
+Scaffolding generated with create-vite@5.1.3:
 
 ```sh
-; git clone git@github.com:deomorxsy/florm.git
-; python3 -m venv venv
-```
-
-# Frontend
-
-Scaffolding generated with create-vite@5.1.0:
-```sh
-; npm create vite@5.1.0 frontend/ -- --template vue-ts
-; npm install
+; npm create vite@5.1.3 frontend/ -- --template vue-ts
+;
+; npm install vee-validate@4.12.5 yup@1.3.3 vue-router@4.2.5 vue-router@4.2.5 axios@1.6.7 pinia@2.1.7
+;
+; npm install -D '@types/node'
+;
 ; npm run dev
 
 ```
-# Database
-### Standalone container
+## Database
+> run it as a standalone container so instances of postgres aren't polluted
 
 Run the container process with the database
 ```sh
@@ -53,12 +59,16 @@ done
 ```
 
 
-# Backend
-### Running in Standalone mode
+## Backend
+> manually running the process
+
+Make sure to set the virtualenv:
+```sh
+; git clone git@github.com:isi23drop/vlusk-primer.git
+; python3 -m venv venv
+```
 
 Prepare the environment:
-
-
 ```sh
 ; cd ./vlusk/backend/
 ; source ../venv/bin/activate
@@ -67,41 +77,35 @@ Prepare the environment:
 
 ```
 
-
 Now that all dependencies are installed, just run each process from a different terminal:
 
-1. init the sqlite3 database
+1. database migration
 ```sh
 flask --app app init-db
 ```
 
 2. PS: now in flask 3.0 the FLASK_ENV is deprecated alongside the debug mode that goes back to the framework on the CLI call, hence the flag "--debug".
 ```sh
-flask --app app run --debug
+cd ./app/
+flask --debug run
 ```
 
-### Podman Service and DOCKER_HOST
+# Deployments
+
+## Podman Service and DOCKER_HOST
+[compose](https://docs.docker.com/compose/) concentrates in orchestrating multiple containers in a single host. To do this with k8s, you would need kind, k3s (does not use virtualization) or similar. It was made to be compatible with other OCI runtimes, such as Podman, which was one of the first to enable rootless containers, and can be setup with compose using the Podman Service's systemd unit file for unix sockets.
+
 The orchestration tool ```docker-compose``` supports Podman Service through the DOCKER_HOST environment variable. This makes it possible to run containers with podman but with the benefit of rootless.
 
-1. install docker-compose
-2. use the init system to start the Podman Socket. Using Systemd here:
+Source the [script](./scripts/podman-service-compose.sh) and run it to run compose with podman:
+
 ```sh
-systemctl -user start podman.socket
-```
-3. check if the system is running. It should return an "OK"
-```sh
-$ curl -H "Content-Type: application/json" --unix-socket $XDG_RUNTIME_DIR/podman/podman.sock http://localhost/_ping
-```
-4. set up the DOCKER_HOST environment variable:
-```sh
-export DOCKER_HOST=unix://$XDG_RUNTIME_DIR/podman/podman.sock
+; source ./scripts/podman-service-compose.sh
 ```
 
-5. run docker-compose at the root of the repository
-```sh
-docker-compose  up
-```
 
-### Running with the podman-compose script
-### Running with k8s
-Here you can use k3s.
+## Running with the podman-compose script
+
+
+## Running with k8s
+Kubernetes is a container orchestrator. To run this project on single host just like the Compose tool, you can use tools like kind or k3s (which don't use virtualization).

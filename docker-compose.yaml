@@ -1,5 +1,19 @@
 version: "3.7"
 services:
+  front:
+    image: localhost:front_image:v3
+    restart: always
+    environment:
+      VAR: example
+    build:
+      context: "./frontend/"
+  back:
+    image: localhost:back_image:v3
+    restart: always
+    build:
+      context: "./backend/"
+      target: builder
+    stop_signal: SIGINT
   db:
     image: postgres:14
     restart: always

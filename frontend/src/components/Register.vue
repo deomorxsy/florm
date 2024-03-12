@@ -9,20 +9,20 @@
       <!-- Content for the right column goes here -->
     <form id="innerForm" @submit.prevent="handleSubmit">
         <label>Username: </label>
-        <input type="username" required v-model="formData.user">
+        <input type="username" required v-model="formData.username">
 
         <label>Email: </label>
-        <input type="email" required v-model="email">
+        <input type="email" required v-model="formData.email">
 
         <label>Password: </label>
-        <input type="password" required v-model="password">
+        <input type="password" required v-model="formData.password">
         <input type="checkbox" v-model="showPassword" @change="toggleVisibility">
         <label>Show Password</label>
 
         <hr width="10%" >
 
         <label>Role:</label>
-        <select required v-model="role">
+        <select required v-model="formData.role">
             <option>Professor</option>
             <option>Alumni</option>
             <option>Escolaridade</option>
@@ -44,9 +44,7 @@
     </div>
           </div>
 
-    <p>Email: {{ email }}</p>
-    <p>Password: {{ password }}</p>
-    <p>Role: {{ role }}</p>
+
 </template>
 
 <script setup lang="ts">
@@ -57,17 +55,17 @@ import { ref } from 'vue';
 import axios from 'axios';
 import querystring from 'querystring';
 
-const email = ref('');
-const password = ref('');
+//const email = ref('');
+//const password = ref('');
 const showPassword = false;
-const role = ref('');
+//const role = ref('');
 
 const toggleVisibility = () => {
     this.showPassword = !this.showPassword;
 };
 
 const formData = ref({
-    user: '',
+    username: '',
     email: '',
     password: '',
     role: '',
@@ -76,12 +74,6 @@ const formData = ref({
 
 // state management: reactive ref/reactive,
 // pinia, vuex. Also redux vs useState in react
-
-
-const post = ref({
-    title: '',
-    body: '',
-})
 
 const handleInput = (event: Event) => {
     // validate input
@@ -93,8 +85,16 @@ const handleSubmit = async () => {
     // handle post request from submit
     console.log("form submitted!");
     try {
-        const response = await axios.post('https://jsonplaceholder.typicode.com/posts', formData.value);
-        console.log(response);
+        const response = await axios.post(
+        'http://127.0.0.1:5000/auth/register',//'https://jsonplaceholder.typicode.com/posts', //'127.0.0.1:5000/register',
+        formData.value,
+        {headers: {
+            'content-type': 'application/json',
+            withCredentials: true,
+        }},
+        );
+        return response;
+        //console.log(response);
     } catch(err) {
     console.log(err);
     };

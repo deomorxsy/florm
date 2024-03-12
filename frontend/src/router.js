@@ -3,12 +3,13 @@ import Home from "./views/HomeView.vue";
 import Login from "./views/LoginView.vue";
 import Register from "./components/Register.vue";
 import Ping from "./components/Ping.vue";
+import BoardUser from "./components/dashBoardUser.vue"
 
 // lazy-loaded
 const Profile = () => import("./views/Profile.vue")
 //const BoardAdmin = () => import("./components/BoardAdmin.vue")
 //const BoardModerator = () => import("./components/BoardModerator.vue")
-const BoardUser = () => import("./components/dashBoardUser.vue")
+//const BoardUser = () => import("./components/dashBoardUser.vue")
 
 const routes = [
   {

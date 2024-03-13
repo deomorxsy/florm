@@ -3,7 +3,7 @@
     <!-- Import and use the Sidebar component -->
     <Sidebar />
 
-    <!-- Your main content goes here -->
+    <!-- main content goes here -->
     <router-view />
   </div>
       <div>
@@ -15,12 +15,12 @@
     <main>
       <section>
         <h2>Welcome, {{ username }}!</h2>
-        <!-- Add your dashboard content here -->
+        <!-- dashboard content here -->
 
 
       </section>
     </main>
-
+    <!-- admin board component below-->
     <AdminBoard />
 
     <div class="container mt-3">
@@ -79,6 +79,7 @@ export default {
   components: {
     Sidebar, // Register the Sidebar component
     Bar, // Register the Bar component from vue-chartjs
+    AdminBoard
   },
   data() {
     return {

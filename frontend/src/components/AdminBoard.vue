@@ -114,7 +114,8 @@ export default {
 
 <style>
 .table-container {
-  margin: 20px;
+  margin-left: 300px;
+  margin-right: 300px;
 }
 
 table {
@@ -152,6 +153,18 @@ tr:hover {
   left: 0;
   width: 100%;
   z-index: 999;
+}
+
+@media only screen and (max-width: 10px) {
+  table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  th, td {
+    display: block;
+    text-align: center;
+  }
 }
 </style>
 

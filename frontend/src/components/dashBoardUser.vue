@@ -16,8 +16,12 @@
       <section>
         <h2>Welcome, {{ username }}!</h2>
         <!-- Add your dashboard content here -->
+
+
       </section>
     </main>
+
+    <AdminBoard />
 
     <div class="container mt-3">
       <div class="row">
@@ -65,6 +69,7 @@ import { Bar } from 'vue-chartjs';
 
 // Import the Sidebar component
 import Sidebar from './SideBar.vue';
+import AdminBoard from './AdminBoard.vue'
 
 // Register Chart.js components
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);

@@ -1,0 +1,56 @@
+<template>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Example</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="app">
+        <canvas id="myChart"></canvas>
+    </div>
+</template>
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        chartData: {
+            labels: ['ISI', 'TIA', 'GP'],
+            datasets: [{
+                label: 'Contagem',
+                data: [21, 18, 15],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        chartOptions: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    },
+    mounted() {
+        const ctx = document.getElementById('myChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: this.chartData,
+            options: this.chartOptions
+        });
+    }
+});
+</script>
+
+<style>
+</style>

@@ -1,11 +1,13 @@
 from flask import Blueprint, jsonify, make_response
+from flask_cors import CORS, cross_origin
 from app.controllers.alumni_ctr import (
         get_all_alumni_ctr, get_alumni_ctr,
         update_alumni_ctr, delete_alumni_ctr
         )
 
-blueprint = Blueprint('alumni', __name__)
 
+blueprint = Blueprint('alumni', __name__)
+CORS(blueprint)
 
 # test route
 @blueprint.route('/alumni/<name>', methods=['GET'])

@@ -1,7 +1,4 @@
 <template>
-  <div>
-    <canvas ref="chart" width="400" height="400"></canvas>
-  </div>
 </template>
 
 <script>

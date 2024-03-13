@@ -4,6 +4,7 @@ import Login from "./views/LoginView.vue";
 import Register from "./components/Register.vue";
 import Ping from "./components/Ping.vue";
 import BoardUser from "./components/dashBoardUser.vue"
+import AdminBoard from "./components/AdminBoard.vue"
 
 // lazy-loaded
 const Profile = () => import("./views/Profile.vue")
@@ -36,12 +37,11 @@ const routes = [
     // lazy-loaded
     component: Profile,
   },
-  //{
-  //  path: "/admin",
-  //  name: "admin",
-    // lazy-loaded
-  //  component: BoardAdmin,
-  //},
+  {
+    path: "/admin",
+    name: "admin",
+    component: AdminBoard,
+  },
   //{
   //  path: "/mod",
   //  name: "moderator",

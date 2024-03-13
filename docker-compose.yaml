@@ -1,28 +1,43 @@
 version: "3.7"
 services:
-  front:
-    image: localhost:front_image:v3
+  frontend:
     restart: always
     environment:
       VAR: example
     build:
       context: "./frontend/"
-  back:
-    image: localhost:back_image:v3
+    ports:
+      - "5173:5173"
+    volumes:
+      - "./frontend/dist:/usr/share/nginx/html"
+    command: "npm run dev" #without build
+  backend:
     restart: always
     build:
       context: "./backend/"
       target: builder
-    stop_signal: SIGINT
-  db:
-    image: postgres:14
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: example
-  adminer:
-    image: adminer
-    restart: always
     ports:
-      - 8080:8080
+      - "5000:5000"
+    stop_signal: SIGINT
+    environment:
+      DB_URL: "postgresql://admin:Passw0rd@localhost:5432/"
+      FLASK_APP: "./app/app.py"
+  database:
+    image: postgres:16.0
+    container_name: db
+    ports:
+      - "5432:5432"
+    #restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: Passw0rd
+  nginx:
+    image: nginx:alpine:1.25.4
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    depends-on:
+      - frontend
 volumes:
   myapp_vol: {}
